@@ -27,7 +27,7 @@ illustrations, or extra elements unless the user asks for them.
 - Mobile (< 768px): steps stack vertically, dividers become horizontal.
 
 ## Step anatomy
-- Number tile: 32px square, `border-radius: 8px`, brand-color gradient, white number (15px, weight 700), centered.
+- Number tile: 32px square, `border-radius: 8px`, `var(--brand-fill)`, white number (15px, weight 700), centered.
 - Title: 16px, weight 600, near-black.
 - Description: 14px, regular, muted gray (`#6B6B70`), `line-height: 1.45`.
 - Number tile on the left, text on the right, 14px gap, vertically centered.

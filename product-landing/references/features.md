@@ -55,7 +55,7 @@ Pick the mode from the product type. If unclear, use `task`.
 - Placed at the bottom of the stage card, 16–24px gap above.
 - White pill, height 40px, padding 0 16px, gap 8px between chips.
 - Icon (Phosphor `regular`, 16px, near-black) + label (15px, weight 500).
-- **Active chip**: brand-color gradient background, white icon and label.
+- **Active chip**: `var(--brand-fill)` background, white icon and label.
 - Chips are `<button>` elements with `aria-pressed`.
 - Desktop: wrap onto multiple lines.
 - Mobile (< 768px): one horizontal row, `overflow-x: auto`, hidden scrollbar, `scroll-snap-type: x mandatory`,

@@ -8,7 +8,8 @@ Nothing new is introduced here.
 
 ## Layout
 - Centered single column, `text-align: center`.
-- Generous vertical padding: `clamp(80px, 14vh, 160px)` top and bottom.
+- No extra top padding: the global section gap (SKILL.md) already separates it from the previous section.
+- Bottom padding before the footer divider: `clamp(48px, 8vw, 80px)`.
 - No background color, no card, no image — plain page background.
 - A hairline divider (`rgba(0,0,0,0.08)`) separates it from the footer below.
 

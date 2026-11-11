@@ -78,7 +78,9 @@ Define these as CSS variables on `:root` and use only them:
 
 ```css
 :root {
-  --brand: #229ED9;              /* replaced by the user's brand color */
+  --brand: #229ED9;              /* the user's brand color = bottom of the gradient */
+  --brand-top: var(--brand);     /* fallback for old browsers: flat color */
+  --brand-fill: linear-gradient(180deg, var(--brand-top), var(--brand));
   --brand-tint: color-mix(in srgb, var(--brand) 12%, white);
   --text: #0A0A0A;
   --text-muted: #6B6B70;
@@ -88,9 +90,18 @@ Define these as CSS variables on `:root` and use only them:
   --font: "Inter", system-ui, -apple-system, sans-serif;
   --container: 1040px;
 }
+
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --brand-top: oklch(from var(--brand) calc(l + 0.042) calc(c * 1.08) calc(h + 1.8));
+  }
+}
 ```
 
 - Light theme only. One accent color (`--brand`); everything else is black, gray and white.
+- Brand-color **surfaces** (buttons, active chips, number tiles, icon tiles) use `var(--brand-fill)` — a subtle vertical gradient.
+  Brand-color **lines and text** (checkmarks, links, borders, caret, icons) use `var(--brand-fill)`.
+  Never write gradient values by hand — always use the tokens.
 - Font: Inter from Google Fonts (weights 400, 500, 600, 700, 800).
 - Icons: Phosphor Icons via `https://unpkg.com/@phosphor-icons/web@2.1.1` (pinned version).
 

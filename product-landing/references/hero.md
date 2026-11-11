@@ -26,9 +26,8 @@ Use only the elements that the product needs, but keep this order:
 4. **Lead paragraph** — 2–4 sentences explaining what the product does in plain words.
 5. **Primary CTA** — exactly one button.
 6. **Microcopy** — one short status line under the CTA (e.g. "Private beta · join the waitlist").
-7. **Secondary entry card** (optional) — an alternative way in, e.g. a QR code for mobile, an app-store badge, a code snippet.
 
-Spacing between items (approx.): mark→H1 24px, H1→H2 8px, H2→lead 16px, lead→CTA 40px, CTA→microcopy 16px, microcopy→card 32px.
+Spacing between items (approx.): mark→H1 24px, H1→H2 8px, H2→lead 16px, lead→CTA 40px, CTA→microcopy 16px
 
 ### Typography
 - Font: a neutral grotesque sans (default: `Inter`, fallback `system-ui`).
@@ -40,20 +39,14 @@ Spacing between items (approx.): mark→H1 24px, H1→H2 8px, H2→lead 16px, le
 
 ### Primary CTA
 - Pill shape (`border-radius: 999px`), height ~56px, horizontal padding ~40px.
-- Background: brand-color vertical gradient (lighter top → slightly darker bottom).
+- Background: `var(--brand-fill)`.
 - White label, 18px, weight 600. Optional leading icon (20px) that hints at where the click leads.
 - Soft colored glow: `box-shadow: 0 8px 24px <brand-color at 30% opacity>`.
 - Hover: lift 1px + stronger glow. Active: press back down. Transition 150–200ms.
 
-### Secondary entry card
-- Light neutral surface (`#EEEEF1` on white bg), `border-radius: 20px`, padding 12px 20px 12px 12px.
-- Horizontal: visual on the left (on its own white rounded tile), text on the right.
-- Text: bold 15px title + 14px muted description. Left-aligned inside the card.
-- Hide or swap it when it makes no sense on the current device (e.g. QR code on mobile).
-
 ### Background
 - Default: plain white or near-white. The content carries the page.
-- Alternative: a saturated brand gradient (e.g. diagonal blue). Then invert all hero text to white,
+- Alternative: a solid brand-color background (`var(--brand-fill)`). Then invert all hero text to white,
   lead text to `rgba(255,255,255,0.8)`, and make the CTA white with dark label.
 - Never: busy images, patterns or more than one gradient behind the hero text.
 
@@ -72,18 +65,20 @@ Spacing between items (approx.): mark→H1 24px, H1→H2 8px, H2→lead 16px, le
 - Fallback when `backdrop-filter` is unsupported: use the same color at ~95% opacity.
 
 ### Two states: `on-hero` and `on-content`
-The navbar changes its look once the hero has scrolled away.
-**The change must be motivated by the hero background** — the navbar adapts to what is beneath it.
+The navbar is **always glass** — blurred from the very first frame, in both states.
+On scroll, only the colors change.
 
 | Hero background | `on-hero` state | `on-content` state |
 |---|---|---|
-| **Saturated / dark** (gradient, brand color) | Fully transparent bg, white text & logo, **white** CTA with dark label | Light tinted glass (`rgba(240,246,255,0.7)`), dark text & logo, **brand-colored** CTA with white label |
-| **Light / white** | Transparent bg, no border, CTA in **soft tint** (brand color at ~12% bg, brand-colored label) | White glass (`rgba(255,255,255,0.72)`), hairline bottom border (`rgba(0,0,0,0.08)`), CTA may stay tinted |
+| **Saturated / dark** (brand color) | Dark glass (`rgba(255,255,255,0.08)` + blur), white text, black logo, **white** CTA with dark label | Light glass (`rgba(255,255,255,0.72)` + blur), dark text, black logo, CTA with `var(--brand-fill)` background and white label |
+| **Light / white** | Light glass (`rgba(255,255,255,0.6)` + blur), no border, black logo, CTA in **soft tint** (brand color at ~12% bg, brand-colored label) | Light glass (`rgba(255,255,255,0.72)` + blur), hairline bottom border (`rgba(0,0,0,0.08)`), black logo, CTA with `var(--brand-fill)` background and white label |
 
 Rules:
-- On a light hero, do NOT invert colors — there is no reason to. Only add glass, border, and optional shadow.
+- The navbar background is never fully transparent. `backdrop-filter` is applied in both states.
+- In `on-content`, the CTA **always** uses `var(--brand-fill)` with a white label, whatever the hero background.
+- The logo is always black in both states (see SKILL.md).
 - Animate the switch: `background-color`, `color`, `border-color`, `box-shadow` over 250ms ease.
-- Trigger: an `IntersectionObserver` on the hero element (switch when the hero leaves the viewport under the navbar). Do not use a raw scroll listener with a magic pixel number.
+- Trigger: an `IntersectionObserver` on the hero element. No raw scroll listener with a magic pixel number.
 - Respect `prefers-reduced-motion`: switch instantly, no transition.
 
 ### Links
@@ -94,6 +89,9 @@ Rules:
 ### Mobile (< 768px)
 - Hide text links behind a menu button; keep logo and CTA visible.
 - The menu panel uses the same glass treatment as the navbar.
+
+### Never
+- Nothing below the microcopy: no second button, no QR code, no app-store badges, no secondary card.
 
 ---
 
