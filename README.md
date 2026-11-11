@@ -15,5 +15,5 @@ A collection of custom skills for Claude / Claude Code.
 Install a specific skill:
 
 ```bash
-npx skills add whicencer/my-claude-skills --skill <SCRIPT_NAME>
+npx skills add whicencer/my-claude-skills --skill <SKILL_NAME>
 ```
